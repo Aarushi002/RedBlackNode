@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Replace with your live origin when deployed
+Sitemap: https://redblacknode.com/sitemap.xml

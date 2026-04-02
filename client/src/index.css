@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Typography — utilities: font-sans, font-display */
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: var(--font-sans);
+  --font-family-display: var(--font-display);
+
+  /* Brand palette — dark luxury + controlled red */
+  --color-rbn-void: #030304;
+  --color-rbn-base: #060608;
+  --color-rbn-surface: #0b0b0e;
+  --color-rbn-elevated: #111114;
+  --color-rbn-border: rgba(255, 255, 255, 0.08);
+  --color-rbn-border-strong: rgba(255, 255, 255, 0.12);
+  --color-rbn-muted: #8b8b96;
+  --color-rbn-subtle: #b4b4bd;
+  --color-rbn-fog: #ececea;
+  --color-rbn-white: #f7f7f5;
+
+  --color-rbn-accent: #e11d48;
+  --color-rbn-accent-soft: rgba(225, 29, 72, 0.12);
+  --color-rbn-accent-glow: rgba(225, 29, 72, 0.35);
+
+  --shadow-rbn-soft: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --shadow-rbn-glow: 0 0 60px rgba(225, 29, 72, 0.08);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-rbn-void text-rbn-fog font-sans antialiased;
+    margin: 0;
+    min-height: 100svh;
+  }
+
+  ::selection {
+    background: var(--color-rbn-accent-soft);
+    color: var(--color-rbn-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rbn-accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-rbn-accent);
+    color: var(--color-rbn-white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--color-rbn-white);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skip-link {
+      transition: none;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes rbn-ticker {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .rbn-ticker-fwd {
+    animation: rbn-ticker linear infinite;
+  }
+
+  .rbn-ticker-rev {
+    animation: rbn-ticker linear infinite reverse;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rbn-ticker-fwd,
+    .rbn-ticker-rev {
+      animation: none;
+    }
+  }
+
+  @keyframes hero-tech-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .hero-tech-item {
+    animation: hero-tech-float 5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-tech-item {
+      animation: none;
+    }
+  }
+
+  @keyframes hero-code-float {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.88);
+    }
+    14% {
+      opacity: 0.92;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--hero-dx), var(--hero-dy))
+        rotate(var(--hero-rot)) scale(1);
+    }
+  }
+
+  .hero-code-particle {
+    animation-name: hero-code-float;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-code-particle {
+      animation: none;
+      opacity: 0 !important;
+    }
+  }
+}

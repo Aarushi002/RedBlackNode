@@ -1,0 +1,179 @@
+{
+  "categories": [
+    { "id": "mern", "label": "MERN" },
+    { "id": "shopify", "label": "Shopify" },
+    { "id": "wordpress", "label": "WordPress" },
+    { "id": "ghl", "label": "GHL" }
+  ],
+  "projects": [
+    {
+      "id": "offshorecompanyreg",
+      "category": "mern",
+      "featured": true,
+      "title": "Offshore Company Reg",
+      "description": "Offshore company formation, registration & banking.",
+      "url": "https://www.offshorecompanyreg.com/",
+      "tech": ["React", "Node", "MongoDB"],
+      "image": ""
+    },
+    {
+      "id": "phact",
+      "category": "mern",
+      "title": "pHact | ProCaps Labs",
+      "description": "Soap-free natural skin pH cleansing bar — dermatologist tested.",
+      "url": "https://phact.procapslabs.com/",
+      "tech": ["MERN"],
+      "image": ""
+    },
+    {
+      "id": "love-cuba",
+      "category": "mern",
+      "title": "Love Cuba",
+      "description": "Brand experience and project showcase.",
+      "url": "https://share.google/mQrUBNa9fktu82zax",
+      "tech": ["React"],
+      "image": ""
+    },
+    {
+      "id": "talent-by-design",
+      "category": "mern",
+      "title": "Talent by Design",
+      "description": "Organizational change — POD-360™.",
+      "url": "https://talent-by-design.vercel.app/",
+      "tech": ["React", "Full-stack"],
+      "image": ""
+    },
+    {
+      "id": "gammaflow-capital",
+      "category": "mern",
+      "title": "GammaFlow Capital",
+      "description": "Finance & capital.",
+      "url": "https://www.gammaflowcapital.com/",
+      "tech": ["MERN"],
+      "image": ""
+    },
+    {
+      "id": "cafeholic",
+      "category": "mern",
+      "title": "Cafeholic",
+      "description": "College cafeteria menu & order site.",
+      "url": "https://cafe-holic-alpha.vercel.app/",
+      "tech": ["React", "Node"],
+      "image": ""
+    },
+    {
+      "id": "skillswap-hub",
+      "category": "mern",
+      "title": "SkillSwap Hub",
+      "description": "Skill exchange platform.",
+      "url": "https://skill-swap-frontend-gray.vercel.app/",
+      "tech": ["MERN"],
+      "image": ""
+    },
+    {
+      "id": "pure-femm",
+      "category": "shopify",
+      "featured": true,
+      "title": "Pure Femm",
+      "description": "Custom Shopify storefront for the Pure Femm brand.",
+      "url": "https://purefemm.com/",
+      "tech": ["Shopify", "Liquid"],
+      "image": ""
+    },
+    {
+      "id": "deluxy",
+      "category": "shopify",
+      "title": "Deluxy",
+      "description": "Modern Shopify e-commerce site for Deluxy.",
+      "url": "https://deluxy.it/",
+      "tech": ["Shopify"],
+      "image": ""
+    },
+    {
+      "id": "gomi-design",
+      "category": "shopify",
+      "title": "Gomi Design",
+      "description": "Product-focused Shopify experience for Gomi Design.",
+      "url": "https://gomi.design/",
+      "tech": ["Shopify"],
+      "image": ""
+    },
+    {
+      "id": "lighting-n-beyond",
+      "category": "shopify",
+      "title": "Lighting N Beyond",
+      "description": "Shopify store for lighting and home-decor products.",
+      "url": "https://lightingnbeyond.com/",
+      "tech": ["Shopify"],
+      "image": ""
+    },
+    {
+      "id": "gearhub-eu",
+      "category": "shopify",
+      "title": "GearHub EU",
+      "description": "Shopify shop for GearHub’s European customers.",
+      "url": "https://www.gearhub.eu/en-nl",
+      "tech": ["Shopify"],
+      "image": ""
+    },
+    {
+      "id": "trafficwerk",
+      "category": "wordpress",
+      "featured": true,
+      "title": "Trafficwerk",
+      "description": "WordPress site for Trafficwerk’s performance marketing services.",
+      "url": "https://temp.trafficwerk.de/",
+      "tech": ["WordPress"],
+      "image": ""
+    },
+    {
+      "id": "vivekananda-hospital",
+      "category": "wordpress",
+      "title": "Vivekananda Hospital",
+      "description": "Hospital information and services site built on WordPress.",
+      "url": "https://vivekanandahospital.in/",
+      "tech": ["WordPress"],
+      "image": ""
+    },
+    {
+      "id": "honeycroft",
+      "category": "wordpress",
+      "title": "Honeycroft",
+      "description": "WordPress site for Honeycroft’s care and community services.",
+      "url": "https://honeycroft.com.au/",
+      "tech": ["WordPress"],
+      "image": ""
+    },
+    {
+      "id": "lyka-furniture",
+      "category": "wordpress",
+      "title": "Lyka Furniture",
+      "description": "WooCommerce store for Lyka’s furniture catalog.",
+      "url": "https://lykafurniture.com/",
+      "tech": ["WooCommerce", "WordPress"],
+      "image": ""
+    },
+    {
+      "id": "brockerhoff",
+      "category": "wordpress",
+      "title": "Brockerhoff LLC",
+      "description": "Professional WordPress site for Brockerhoff LLC.",
+      "url": "https://brockerhoffllc.com/",
+      "tech": ["WordPress"],
+      "image": ""
+    },
+    {
+      "id": "chill-bar-delivery",
+      "category": "wordpress",
+      "title": "Chill Bar Delivery",
+      "description": "WooCommerce site for ordering from Chill Bar Delivery.",
+      "url": "https://chillbardelivery.com/",
+      "tech": ["WooCommerce", "WordPress"],
+      "image": ""
+    }
+  ],
+  "ghlPlaceholder": {
+    "title": "GoHighLevel & automation",
+    "body": "Selected workflow automation and CRM implementation case studies available on request."
+  }
+}
