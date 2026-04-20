@@ -9,7 +9,7 @@ export function BrandLogo({ className = '' }) {
       width={1024}
       height={1024}
       decoding="async"
-      className={['block h-auto w-auto object-contain object-left', className].join(' ')}
+      className={['block object-contain object-left', className].join(' ')}
     />
   )
 }
