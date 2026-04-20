@@ -8,8 +8,8 @@ export function Footer() {
 
   return (
     <footer className="border-t border-rbn-border bg-rbn-base">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10">
-        <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-10 lg:items-start">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-10 lg:py-16">
+        <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-3 lg:gap-10 lg:items-start">
           <div className="flex flex-col lg:justify-self-start">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rbn-muted">Navigate</p>
             <ul className="mt-4 flex flex-col gap-2">
@@ -33,15 +33,15 @@ export function Footer() {
               className="inline-flex outline-none transition-opacity hover:opacity-90 focus-visible:opacity-100"
               onClick={goToHero}
             >
-              <BrandLogo className="h-11 w-auto max-w-[220px] object-center sm:h-12 sm:max-w-[240px]" />
+              <BrandLogo className="h-8 w-auto max-w-[160px] object-center sm:h-10 sm:max-w-[200px]" />
             </Link>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-rbn-muted">
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-rbn-muted">
               A digital product and development studio building precise web systems, commerce, and
               automation for teams that expect craft and clarity.
             </p>
             <a
               href="mailto:redblacknode@gmail.com"
-              className="mt-6 inline-flex text-sm font-medium text-rbn-fog transition-colors hover:text-rbn-accent"
+              className="mt-4 inline-flex text-sm font-medium text-rbn-fog transition-colors hover:text-rbn-accent"
             >
               redblacknode@gmail.com
             </a>
@@ -64,7 +64,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-rbn-border pt-8 text-xs text-rbn-muted sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-rbn-border pt-6 text-xs text-rbn-muted sm:mt-12 sm:flex-row sm:items-center sm:gap-4 sm:pt-8">
           <p>© {new Date().getFullYear()} RedBlackNode. All rights reserved.</p>
           <p className="text-rbn-muted/80">Built with intent — design, engineering, motion.</p>
         </div>

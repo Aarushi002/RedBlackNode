@@ -85,7 +85,7 @@ export function HeroSection() {
     <section
       id="hero"
       ref={rootRef}
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-8 pt-14 sm:pb-14 sm:pt-24"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-8 pt-12 sm:pb-14 sm:pt-20 lg:pt-24"
     >
       {reduced && (
         <div
