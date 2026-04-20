@@ -33,7 +33,7 @@ export function Footer() {
               className="inline-flex outline-none transition-opacity hover:opacity-90 focus-visible:opacity-100"
               onClick={goToHero}
             >
-              <BrandLogo className="h-8 w-auto max-w-[160px] object-center sm:h-10 sm:max-w-[200px]" />
+              <BrandLogo className="h-12 w-auto max-w-[220px] object-center sm:h-14 sm:max-w-[260px]" />
             </Link>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-rbn-muted">
               A digital product and development studio building precise web systems, commerce, and

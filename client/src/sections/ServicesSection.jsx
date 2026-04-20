@@ -12,7 +12,7 @@ export function ServicesSection() {
     <section
       id="services"
       ref={ref}
-      className="scroll-mt-12 border-b border-rbn-border/60 bg-rbn-void py-12 sm:py-16 lg:scroll-mt-[5rem] lg:py-20"
+      className="scroll-mt-14 border-b border-rbn-border/60 bg-rbn-void py-12 sm:py-16 lg:scroll-mt-[5rem] lg:py-20"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SectionHeader

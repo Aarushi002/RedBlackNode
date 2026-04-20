@@ -85,7 +85,7 @@ export function HeroSection() {
     <section
       id="hero"
       ref={rootRef}
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-8 pt-12 sm:pb-14 sm:pt-20 lg:pt-24"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-8 pt-14 sm:pb-14 sm:pt-20 lg:pt-24"
     >
       {reduced && (
         <div
@@ -130,7 +130,7 @@ export function HeroSection() {
         </div>
 
         {!reduced && (
-          <div className="relative mx-auto w-full max-w-[min(100%,30rem)] -translate-y-5 md:mx-0 md:max-w-none md:justify-self-end md:-translate-y-11 lg:-translate-y-14">
+          <div className="relative -mx-4 w-[calc(100%+2rem)] -translate-y-5 sm:-mx-6 sm:w-[calc(100%+3rem)] md:mx-0 md:w-full md:max-w-none md:justify-self-end md:-translate-y-11 lg:-translate-y-14">
             <div className="relative h-[min(46vh,440px)] w-full overflow-visible rounded-[2rem] bg-transparent shadow-[0_0_64px_rgba(180,30,40,0.1)] sm:h-[min(50vh,480px)] md:h-[min(62vh,560px)] md:min-h-[400px] lg:min-h-[460px]">
               <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
                 <HeroCanvasBoundary>
