@@ -8,8 +8,8 @@ export function Footer() {
 
   return (
     <footer className="border-t border-rbn-border bg-rbn-base">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-10 lg:items-start">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10">
+        <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-10 lg:items-start">
           <div className="flex flex-col lg:justify-self-start">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rbn-muted">Navigate</p>
             <ul className="mt-4 flex flex-col gap-2">

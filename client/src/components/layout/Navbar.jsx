@@ -65,7 +65,7 @@ export function Navbar() {
           : 'border-white/[0.08] bg-black shadow-[0_4px_24px_rgba(0,0,0,0.45)]',
       ].join(' ')}
     >
-      <div className="mx-auto flex min-h-[4.75rem] max-w-6xl items-center justify-between px-5 py-2 sm:px-8 lg:min-h-[6rem] lg:px-10">
+      <div className="mx-auto flex min-h-14 max-w-6xl items-center justify-between gap-3 px-4 py-2 sm:min-h-16 sm:px-6 lg:min-h-[6rem] lg:px-10">
         <Link
           to="/"
           aria-label="RedBlackNode — Home"
@@ -75,7 +75,7 @@ export function Navbar() {
             goToHero(e)
           }}
         >
-          <BrandLogo className="h-[4.75rem] w-auto max-w-[min(78vw,420px)] sm:h-[5.5rem] sm:max-w-[min(72vw,480px)] lg:h-[6.25rem] lg:max-w-[min(50vw,540px)]" />
+          <BrandLogo className="h-9 w-auto max-w-[52vw] sm:h-11 sm:max-w-[44vw] lg:h-[6.25rem] lg:max-w-[min(50vw,540px)]" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex lg:gap-2" aria-label="Primary">
@@ -123,7 +123,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 bg-white/[0.06] text-white backdrop-blur-sm transition-colors hover:border-white/35 hover:bg-white/10 lg:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/20 bg-white/[0.06] text-white backdrop-blur-sm transition-colors hover:border-white/35 hover:bg-white/10 sm:h-11 sm:w-11 lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((o) => !o)}
@@ -159,7 +159,7 @@ export function Navbar() {
           open ? 'block' : 'hidden',
         ].join(' ')}
       >
-        <nav className="flex flex-col gap-1 px-5 py-4 sm:px-8" aria-label="Mobile primary">
+        <nav className="flex flex-col gap-1 px-4 py-3 sm:px-6 sm:py-4" aria-label="Mobile primary">
           {NAV_LINKS.map((link) => {
             const active = isNavActive(link, location)
             return (
@@ -172,7 +172,7 @@ export function Navbar() {
                 }}
                 aria-current={active ? 'page' : undefined}
                 className={[
-                  'rounded-lg px-3 py-3 text-lg font-bold tracking-tight transition-colors',
+                  'rounded-lg px-3 py-2.5 text-base font-semibold tracking-tight transition-colors sm:text-lg',
                   active ? 'bg-white/10 text-white' : 'text-zinc-300 hover:bg-white/5 hover:text-white',
                 ].join(' ')}
               >

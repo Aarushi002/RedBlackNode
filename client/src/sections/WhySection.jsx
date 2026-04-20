@@ -11,7 +11,7 @@ export function WhySection() {
     <section
       id="why"
       ref={ref}
-      className="scroll-mt-[5.5rem] border-b border-rbn-border/60 bg-rbn-void py-24 sm:py-32"
+      className="scroll-mt-14 border-b border-rbn-border/60 bg-rbn-void py-16 sm:py-24 lg:scroll-mt-[6rem] lg:py-32"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SectionHeader

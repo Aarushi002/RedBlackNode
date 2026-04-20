@@ -44,6 +44,12 @@
     }
   }
 
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   body {
     @apply bg-rbn-void text-rbn-fog font-sans antialiased;
     margin: 0;

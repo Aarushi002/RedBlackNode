@@ -85,7 +85,7 @@ export function HeroSection() {
     <section
       id="hero"
       ref={rootRef}
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-10 pt-[5.5rem] sm:pb-14 sm:pt-24"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-8 pt-14 sm:pb-14 sm:pt-24"
     >
       {reduced && (
         <div
@@ -96,19 +96,19 @@ export function HeroSection() {
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-rbn-void via-rbn-void/90 to-transparent" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-10 px-5 pt-16 sm:px-8 md:grid-cols-2 md:gap-12 md:pt-20 lg:px-10 lg:pt-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-8 px-4 pt-6 sm:gap-10 sm:px-6 sm:pt-14 md:grid-cols-2 md:gap-12 md:pt-20 lg:px-10 lg:pt-16">
         <div className="min-w-0 max-w-3xl [perspective:1200px]">
           <div className="hero-accent-line h-px w-24 max-w-[40%] bg-gradient-to-r from-rbn-accent via-rbn-accent/60 to-transparent" />
 
-          <h1 className="hero-title mt-8 transform-gpu font-display text-[clamp(2.1rem,4.8vw,3.65rem)] font-semibold leading-[1.06] tracking-tight text-rbn-white [transform-style:preserve-3d]">
+          <h1 className="hero-title mt-6 transform-gpu font-display text-[clamp(1.9rem,4.8vw,3.65rem)] font-semibold leading-[1.08] tracking-tight text-rbn-white [transform-style:preserve-3d] sm:mt-8">
             <SplitWords text={TITLE} />
           </h1>
 
-          <p className="hero-sub mt-7 max-w-2xl text-base leading-relaxed text-rbn-muted sm:text-[1.05rem]">
+          <p className="hero-sub mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-rbn-muted sm:mt-7 sm:text-[1.05rem]">
             {SUB}
           </p>
 
-          <div className="mt-11">
+          <div className="mt-8 sm:mt-11">
             <Link
               to="/contact"
               className="hero-cta inline-flex min-h-[44px] items-center justify-center rounded-xl bg-rbn-accent px-8 py-3.5 text-sm font-medium text-white shadow-[0_0_44px_rgba(225,29,72,0.28)] transition-transform hover:-translate-y-0.5 hover:bg-[#f43f5e] hover:shadow-[0_0_56px_rgba(225,29,72,0.38)]"
@@ -122,7 +122,7 @@ export function HeroSection() {
 
           <Link
             to={{ pathname: '/', hash: 'about' }}
-            className="hero-scroll group mt-16 inline-flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-rbn-muted transition-colors hover:text-rbn-fog"
+            className="hero-scroll group mt-10 inline-flex items-center gap-3 text-[0.7rem] font-medium uppercase tracking-[0.28em] text-rbn-muted transition-colors hover:text-rbn-fog sm:mt-16 sm:text-xs"
           >
             <span className="h-8 w-px bg-gradient-to-b from-rbn-accent/90 to-transparent" aria-hidden />
             About us

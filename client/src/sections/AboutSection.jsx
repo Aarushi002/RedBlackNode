@@ -16,7 +16,7 @@ export function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative scroll-mt-[5.5rem] overflow-hidden border-b border-rbn-border/60 bg-rbn-base py-14 sm:py-20"
+      className="relative scroll-mt-14 overflow-hidden border-b border-rbn-border/60 bg-rbn-base py-12 sm:py-16 lg:scroll-mt-[6rem] lg:py-20"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent)]"
