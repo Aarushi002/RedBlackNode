@@ -65,7 +65,7 @@ export function Navbar() {
           : 'border-white/[0.08] bg-black shadow-[0_4px_24px_rgba(0,0,0,0.45)]',
       ].join(' ')}
     >
-      <div className="mx-auto flex min-h-14 max-w-6xl items-center justify-between gap-3 px-4 py-2 sm:min-h-16 sm:px-6 lg:min-h-[5rem] lg:px-10">
+      <div className="mx-auto flex min-h-14 max-w-6xl items-center justify-between gap-3 px-4 py-2 sm:min-h-16 sm:px-6 lg:min-h-[6rem] lg:px-10">
         <Link
           to="/"
           aria-label="RedBlackNode — Home"
@@ -75,7 +75,7 @@ export function Navbar() {
             goToHero(e)
           }}
         >
-          <BrandLogo className="h-10 w-auto max-w-[50vw] sm:h-12 sm:max-w-[44vw] lg:h-16 lg:max-w-[min(40vw,360px)]" />
+          <BrandLogo className="h-10 w-auto max-w-[50vw] sm:h-12 sm:max-w-[44vw] lg:h-24 lg:max-w-[min(45vw,440px)]" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex lg:gap-2" aria-label="Primary">

@@ -11,7 +11,7 @@ export function ContactSection() {
     <section
       id="contact"
       ref={ref}
-      className="relative scroll-mt-14 overflow-hidden border-b border-rbn-border/60 bg-rbn-void py-16 sm:py-24 lg:scroll-mt-[5rem] lg:py-32"
+      className="relative scroll-mt-14 overflow-hidden border-b border-rbn-border/60 bg-rbn-void py-16 sm:py-24 lg:scroll-mt-[6rem] lg:py-32"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_80%_20%,rgba(225,29,72,0.08),transparent_55%)]" />
 
