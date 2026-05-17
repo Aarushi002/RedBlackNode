@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
-const CONTACT_EMAIL = 'aarushikrishna5@gmail.com'
-const FORMSUBMIT_URL = `https://formsubmit.co/${CONTACT_EMAIL}`
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 const initial = {
   name: '',
@@ -11,23 +11,34 @@ const initial = {
   website: '',
 }
 
+async function submitContact(form) {
+  const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: `RedBlackNode inquiry — ${form.name}`,
+    from_name: 'RedBlackNode Website',
+    replyto: form.email,
+    Name: form.name,
+    Email: form.email,
+    Phone: form.phone || '—',
+    Message: form.message,
+    botcheck: form.website,
+  }
+  const res = await fetch(WEB3FORMS_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await res.json().catch(() => ({}))
+  return { ok: Boolean(data.success), message: data.message || '' }
+}
+
 export function ContactForm() {
   const [form, setForm] = useState(initial)
   const [fieldErrors, setFieldErrors] = useState({})
   const [status, setStatus] = useState('idle')
   const [globalError, setGlobalError] = useState('')
-  const formRef = useRef(null)
-  const iframeRef = useRef(null)
-  const submittedRef = useRef(false)
-  const timeoutRef = useRef(null)
 
   const disabled = status === 'loading'
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
-  }, [])
 
   function validate() {
     const errs = {}
@@ -40,7 +51,7 @@ export function ContactForm() {
     return errs
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     setFieldErrors({})
     setGlobalError('')
@@ -52,34 +63,28 @@ export function ContactForm() {
       return
     }
 
-    if (form.website) {
-      setStatus('success')
-      setForm(initial)
+    if (!WEB3FORMS_KEY) {
+      setGlobalError(
+        'Contact form is not configured yet. Please email redblacknode@gmail.com directly.'
+      )
       return
     }
 
     setStatus('loading')
-    submittedRef.current = true
 
-    timeoutRef.current = window.setTimeout(() => {
-      if (status === 'loading') {
+    try {
+      const result = await submitContact(form)
+      if (result.ok) {
         setStatus('success')
         setForm(initial)
+        return
       }
-    }, 5000)
-
-    formRef.current?.submit()
-  }
-
-  function handleIframeLoad() {
-    if (!submittedRef.current) return
-    submittedRef.current = false
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
+      setGlobalError(result.message || 'Could not send your message. Please try again.')
+      setStatus('error')
+    } catch {
+      setGlobalError('Network error. Check your connection and try again.')
+      setStatus('error')
     }
-    setStatus('success')
-    setForm(initial)
   }
 
   function onChange(field) {
@@ -111,141 +116,111 @@ export function ContactForm() {
   }
 
   return (
-    <>
-      <iframe
-        ref={iframeRef}
-        name="contact-iframe"
-        title="contact submission target"
-        onLoad={handleIframeLoad}
-        style={{ position: 'absolute', width: 0, height: 0, border: 0, left: '-9999px' }}
-        aria-hidden="true"
-      />
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate aria-busy={disabled}>
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={onChange('website')}
+        />
+      </div>
 
-      <form
-        ref={formRef}
-        action={FORMSUBMIT_URL}
-        method="POST"
-        target="contact-iframe"
-        encType="application/x-www-form-urlencoded"
-        onSubmit={handleSubmit}
-        className="space-y-6"
-        noValidate
-        aria-busy={disabled}
-      >
-        <input type="hidden" name="_subject" value={`RedBlackNode inquiry — ${form.name || 'Website contact'}`} />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_replyto" value={form.email} />
-
-        <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
-          <label htmlFor="contact-website">Website</label>
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
+            Name <span className="text-rbn-accent">*</span>
+          </label>
           <input
-            id="contact-website"
-            name="_honey"
+            id="contact-name"
             type="text"
-            tabIndex={-1}
-            autoComplete="off"
-            value={form.website}
-            onChange={onChange('website')}
+            required
+            autoComplete="name"
+            disabled={disabled}
+            value={form.name}
+            onChange={onChange('name')}
+            className="mt-2 w-full rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm text-rbn-fog outline-none ring-0 transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
+            placeholder="Your name"
           />
+          {fieldErrors.name && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.name}</p>}
         </div>
-
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
-              Name <span className="text-rbn-accent">*</span>
-            </label>
-            <input
-              id="contact-name"
-              name="Name"
-              type="text"
-              required
-              autoComplete="name"
-              disabled={disabled}
-              value={form.name}
-              onChange={onChange('name')}
-              className="mt-2 w-full rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm text-rbn-fog outline-none ring-0 transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
-              placeholder="Your name"
-            />
-            {fieldErrors.name && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.name}</p>}
-          </div>
-          <div>
-            <label htmlFor="contact-phone" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
-              Phone
-            </label>
-            <input
-              id="contact-phone"
-              name="Phone"
-              type="tel"
-              autoComplete="tel"
-              disabled={disabled}
-              value={form.phone}
-              onChange={onChange('phone')}
-              className="mt-2 w-full rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm text-rbn-fog outline-none transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
-              placeholder="Optional"
-            />
-            {fieldErrors.phone && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.phone}</p>}
-          </div>
-        </div>
-
         <div>
-          <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
-            Email <span className="text-rbn-accent">*</span>
+          <label htmlFor="contact-phone" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
+            Phone
           </label>
           <input
-            id="contact-email"
-            name="Email"
-            type="email"
-            required
-            autoComplete="email"
+            id="contact-phone"
+            type="tel"
+            autoComplete="tel"
             disabled={disabled}
-            value={form.email}
-            onChange={onChange('email')}
+            value={form.phone}
+            onChange={onChange('phone')}
             className="mt-2 w-full rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm text-rbn-fog outline-none transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
-            placeholder="you@company.com"
+            placeholder="Optional"
           />
-          {fieldErrors.email && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.email}</p>}
+          {fieldErrors.phone && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.phone}</p>}
         </div>
+      </div>
 
-        <div>
-          <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
-            Message <span className="text-rbn-accent">*</span>
-          </label>
-          <textarea
-            id="contact-message"
-            name="Message"
-            required
-            rows={5}
-            disabled={disabled}
-            value={form.message}
-            onChange={onChange('message')}
-            className="mt-2 w-full resize-y rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm leading-relaxed text-rbn-fog outline-none transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
-            placeholder="Tell us what you’re building, your timeline, and any links we should see."
-          />
-          {fieldErrors.message && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.message}</p>}
-        </div>
-
-        {globalError && (
-          <div className="text-sm text-rbn-accent" role="alert" aria-live="assertive">
-            {globalError}
-          </div>
-        )}
-
-        <button
-          type="submit"
+      <div>
+        <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
+          Email <span className="text-rbn-accent">*</span>
+        </label>
+        <input
+          id="contact-email"
+          type="email"
+          required
+          autoComplete="email"
           disabled={disabled}
-          className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-rbn-accent py-3.5 text-sm font-semibold text-white shadow-[0_0_40px_rgba(225,29,72,0.25)] transition-[transform,opacity] hover:bg-[#f43f5e] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[200px]"
-        >
-          {status === 'loading' ? (
-            <span className="flex items-center gap-2">
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" aria-hidden />
-              Sending…
-            </span>
-          ) : (
-            'Send message'
-          )}
-        </button>
-      </form>
-    </>
+          value={form.email}
+          onChange={onChange('email')}
+          className="mt-2 w-full rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm text-rbn-fog outline-none transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
+          placeholder="you@company.com"
+        />
+        {fieldErrors.email && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.email}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-[0.18em] text-rbn-muted">
+          Message <span className="text-rbn-accent">*</span>
+        </label>
+        <textarea
+          id="contact-message"
+          required
+          rows={5}
+          disabled={disabled}
+          value={form.message}
+          onChange={onChange('message')}
+          className="mt-2 w-full resize-y rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm leading-relaxed text-rbn-fog outline-none transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60"
+          placeholder="Tell us what you’re building, your timeline, and any links we should see."
+        />
+        {fieldErrors.message && <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors.message}</p>}
+      </div>
+
+      {globalError && (
+        <div className="text-sm text-rbn-accent" role="alert" aria-live="assertive">
+          {globalError}
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={disabled}
+        className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-rbn-accent py-3.5 text-sm font-semibold text-white shadow-[0_0_40px_rgba(225,29,72,0.25)] transition-[transform,opacity] hover:bg-[#f43f5e] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[200px]"
+      >
+        {status === 'loading' ? (
+          <span className="flex items-center gap-2">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" aria-hidden />
+            Sending…
+          </span>
+        ) : (
+          'Send message'
+        )}
+      </button>
+    </form>
   )
 }

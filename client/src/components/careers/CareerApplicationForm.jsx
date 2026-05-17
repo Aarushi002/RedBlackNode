@@ -1,6 +1,8 @@
 import { useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { apiUrl } from '../../utils/api'
+
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 const inputClass =
   'mt-2 w-full rounded-xl border border-rbn-border-strong bg-rbn-surface/80 px-4 py-3 text-sm text-rbn-fog outline-none transition-[border,box-shadow] placeholder:text-rbn-muted/50 focus:border-rbn-accent/50 focus:shadow-[0_0_0_3px_rgba(225,29,72,0.12)] disabled:opacity-60'
@@ -91,50 +93,54 @@ export function CareerApplicationForm({ config }) {
       return
     }
 
+    if (!WEB3FORMS_KEY) {
+      setGlobalError(
+        'Application form is not configured yet. Please email redblacknode@gmail.com directly.'
+      )
+      return
+    }
+
     const applicantName = String(values.fullName || '').trim()
     const applicantEmail = String(values.email || '').trim().toLowerCase()
 
-    const answers = {}
+    const fd = new FormData()
+    fd.append('access_key', WEB3FORMS_KEY)
+    fd.append('subject', `Career application — ${config.formTitle} — ${applicantName}`)
+    fd.append('from_name', 'RedBlackNode Careers')
+    fd.append('replyto', applicantEmail)
+    fd.append('Role', config.formTitle)
+    fd.append('Applicant Name', applicantName)
+    fd.append('Applicant Email', applicantEmail)
+    fd.append('botcheck', honeypot)
+
     for (const f of config.fields) {
       if (f.type === 'section') continue
       if (f.name === 'fullName' || f.name === 'email') continue
       const v = values[f.name]
-      answers[f.label] = f.type === 'checkboxes' ? (Array.isArray(v) ? v.join(', ') : '') : String(v ?? '').trim()
+      const out = f.type === 'checkboxes' ? (Array.isArray(v) ? v.join(', ') : '') : String(v ?? '').trim()
+      fd.append(f.label, out || '—')
     }
 
-    const payload = { applicantName, applicantEmail, answers }
-
-    const fd = new FormData()
-    fd.append('role', config.roleId)
-    fd.append('data', JSON.stringify(payload))
-    if (file) fd.append('resume', file)
+    if (file) {
+      fd.append('Resume', file, file.name)
+    }
 
     setStatus('loading')
     try {
-      const res = await fetch(apiUrl('/api/careers/apply'), {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
         body: fd,
       })
       const data = await res.json().catch(() => ({}))
-      if (res.status === 429) {
-        setGlobalError(data.message || 'Too many attempts. Please try again later.')
-        setStatus('error')
-        return
-      }
-      if (!res.ok) {
-        setGlobalError(data.message || 'Something went wrong. Please try again.')
-        setStatus('error')
-        return
-      }
-      if (data.ok) {
-        setEmailSent(data.emailSent !== false)
+      if (data.success === true || data.success === 'true') {
+        setEmailSent(true)
         setStatus('success')
         setValues(buildInitialState(config.fields))
         setFile(null)
         if (fileInputRef.current) fileInputRef.current.value = ''
         return
       }
-      setGlobalError('Unexpected response. Please try again.')
+      setGlobalError(data.message || 'Could not send your application. Please try again.')
       setStatus('error')
     } catch {
       setGlobalError('Network error. Check your connection and try again.')
