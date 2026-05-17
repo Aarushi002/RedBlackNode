@@ -10,6 +10,7 @@ const labelClass = 'text-xs font-semibold uppercase tracking-[0.18em] text-rbn-m
 function buildInitialState(fields) {
   const s = {}
   for (const f of fields) {
+    if (f.type === 'section') continue
     if (f.type === 'checkboxes') s[f.name] = []
     else s[f.name] = ''
   }
@@ -55,6 +56,7 @@ export function CareerApplicationForm({ config }) {
   function validate() {
     const err = {}
     for (const f of config.fields) {
+      if (f.type === 'section') continue
       const v = values[f.name]
       if (f.type === 'checkboxes') {
         if (f.required && (!Array.isArray(v) || v.length === 0)) {
@@ -94,6 +96,7 @@ export function CareerApplicationForm({ config }) {
 
     const answers = {}
     for (const f of config.fields) {
+      if (f.type === 'section') continue
       if (f.name === 'fullName' || f.name === 'email') continue
       const v = values[f.name]
       answers[f.label] = f.type === 'checkboxes' ? (Array.isArray(v) ? v.join(', ') : '') : String(v ?? '').trim()
@@ -199,7 +202,22 @@ export function CareerApplicationForm({ config }) {
       <p className="text-sm leading-relaxed text-rbn-fog/95">{config.intro}</p>
 
       <div className="space-y-8">
-        {config.fields.map((f) => (
+        {config.fields.map((f, i) => {
+          if (f.type === 'section') {
+            return (
+              <div key={`section-${i}`} className={i === 0 ? '' : 'pt-4'}>
+                <h2 className="font-display text-lg font-semibold tracking-tight text-rbn-white sm:text-xl">
+                  {f.label}
+                </h2>
+                {f.description ? (
+                  <p className="mt-1.5 text-xs leading-relaxed text-rbn-muted">{f.description}</p>
+                ) : null}
+                <div className="mt-3 h-px w-full bg-gradient-to-r from-rbn-accent/40 via-rbn-border to-transparent" />
+              </div>
+            )
+          }
+
+          return (
           <div key={f.name}>
             <label className={labelClass} htmlFor={`career-${f.name}`}>
               {f.label}
@@ -302,7 +320,8 @@ export function CareerApplicationForm({ config }) {
               <p className="mt-1.5 text-xs text-rbn-accent">{fieldErrors[f.name]}</p>
             ) : null}
           </div>
-        ))}
+        )
+        })}
       </div>
 
       <div>
