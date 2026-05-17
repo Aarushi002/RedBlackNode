@@ -40,6 +40,17 @@ app.use((_req, res) => {
   res.status(404).json({ ok: false, message: 'Not found' })
 })
 
+// eslint-disable-next-line no-unused-vars
+app.use((err, _req, res, _next) => {
+  console.error('[express error]', err?.message || err)
+  if (res.headersSent) return
+  res.status(500).json({
+    ok: false,
+    message:
+      'Something went wrong on our end. Please try again, or email redblacknode@gmail.com directly.',
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`API listening on http://localhost:${PORT}`)
 })

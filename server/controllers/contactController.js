@@ -33,32 +33,52 @@ function isSpam(body) {
 }
 
 export async function postContact(req, res) {
-  if (isSpam(req.body)) {
-    return res.status(200).json({ ok: true, ignored: true })
-  }
-
-  const { ok, errors, data } = validateBody(req.body)
-  if (!ok) {
-    return res.status(400).json({ ok: false, errors })
-  }
-
-  if (process.env.MONGODB_URI) {
-    try {
-      await Contact.create(data)
-    } catch (e) {
-      console.error('[contact mongo]', e?.message || e)
+  try {
+    if (isSpam(req.body)) {
+      return res.status(200).json({ ok: true, ignored: true })
     }
+
+    const { ok, errors, data } = validateBody(req.body)
+    if (!ok) {
+      return res.status(400).json({ ok: false, errors, message: 'Please fix the highlighted fields.' })
+    }
+
+    if (process.env.MONGODB_URI) {
+      try {
+        await Contact.create(data)
+      } catch (e) {
+        console.error('[contact mongo]', e?.message || e)
+      }
+    }
+
+    let mail = { sent: false, error: 'not_attempted' }
+    try {
+      mail = await sendContactEmail(data)
+    } catch (e) {
+      console.error('[contact mailer]', e?.message || e)
+      mail = { sent: false, error: 'send_failed' }
+    }
+
+    if (!mail.sent && mail.error === 'mailer_not_configured') {
+      console.error('[contact] mailer not configured — email not delivered')
+    }
+
+    return res.status(201).json({
+      ok: true,
+      emailSent: mail.sent,
+      ...(mail.sent
+        ? {}
+        : {
+            notice:
+              'Your message was received. If email delivery is delayed, please email redblacknode@gmail.com directly.',
+          }),
+    })
+  } catch (e) {
+    console.error('[contact fatal]', e?.message || e)
+    return res.status(500).json({
+      ok: false,
+      message:
+        'We could not process your message right now. Please try again, or email redblacknode@gmail.com directly.',
+    })
   }
-
-  const mail = await sendContactEmail(data)
-
-  if (!mail.sent && mail.error === 'mailer_not_configured') {
-    console.error('[contact] mailer not configured — email not delivered')
-  }
-
-  return res.status(201).json({
-    ok: true,
-    emailSent: mail.sent,
-    ...(mail.sent ? {} : { notice: 'Your message was received. If email delivery is delayed, please email redblacknode@gmail.com directly.' }),
-  })
 }
