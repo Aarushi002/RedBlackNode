@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { apiUrl } from '../../utils/api'
 
 const initial = {
   name: '',
@@ -9,50 +8,29 @@ const initial = {
   website: '',
 }
 
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
-const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+const CONTACT_EMAIL = 'aarushikrishna5@gmail.com'
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`
 
-async function submitViaWeb3Forms(form) {
+async function submitContact(form) {
   const payload = {
-    access_key: WEB3FORMS_KEY,
-    subject: `RedBlackNode inquiry — ${form.name}`,
-    from_name: 'RedBlackNode Website',
-    reply_to: form.email,
-    name: form.name,
-    email: form.email,
-    phone: form.phone || '—',
-    message: form.message,
-    botcheck: form.website,
+    _subject: `RedBlackNode inquiry — ${form.name}`,
+    _template: 'table',
+    _captcha: 'false',
+    _replyto: form.email,
+    Name: form.name,
+    Email: form.email,
+    Phone: form.phone || '—',
+    Message: form.message,
+    _honey: form.website,
   }
-  const res = await fetch(WEB3FORMS_ENDPOINT, {
+  const res = await fetch(FORMSUBMIT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(payload),
   })
   const data = await res.json().catch(() => ({}))
-  return { ok: Boolean(data.success), message: data.message || '' }
-}
-
-async function submitViaBackend(form) {
-  const res = await fetch(apiUrl('/api/contact'), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: form.name,
-      phone: form.phone,
-      email: form.email,
-      message: form.message,
-      website: form.website,
-    }),
-  })
-  const data = await res.json().catch(() => ({}))
-  if (res.status === 429) {
-    return { ok: false, status: 429, message: data.message || 'Too many attempts. Please try again later.' }
-  }
-  if (!res.ok) {
-    return { ok: false, status: res.status, message: data.message || 'Something went wrong. Please try again.', fieldErrors: data.errors }
-  }
-  return { ok: Boolean(data.ok), emailSent: data.emailSent !== false }
+  const success = data?.success === true || data?.success === 'true'
+  return { ok: success, message: data?.message || '' }
 }
 
 export function ContactForm() {
@@ -82,30 +60,14 @@ export function ContactForm() {
     setStatus('loading')
 
     try {
-      if (WEB3FORMS_KEY) {
-        const result = await submitViaWeb3Forms(form)
-        if (result.ok) {
-          setEmailSent(true)
-          setStatus('success')
-          setForm(initial)
-          return
-        }
-        setGlobalError(result.message || 'Could not send your message. Please try again.')
-        setStatus('error')
-        return
-      }
-
-      const result = await submitViaBackend(form)
+      const result = await submitContact(form)
       if (result.ok) {
-        setEmailSent(result.emailSent !== false)
+        setEmailSent(true)
         setStatus('success')
         setForm(initial)
         return
       }
-      if (result.fieldErrors && typeof result.fieldErrors === 'object') {
-        setFieldErrors(result.fieldErrors)
-      }
-      setGlobalError(result.message || 'Something went wrong. Please try again.')
+      setGlobalError(result.message || 'Could not send your message. Please try again.')
       setStatus('error')
     } catch {
       setGlobalError('Network error. Check your connection and try again.')
