@@ -26,7 +26,15 @@ export function createMailer() {
  */
 export async function sendContactEmail(payload) {
   const transporter = createMailer()
-  const to = process.env.MAIL_TO || 'redblacknode@gmail.com'
+  const primary = process.env.MAIL_TO || 'redblacknode@gmail.com'
+  const extra = process.env.CONTACT_MAIL_CC || 'aarushikrishna5@gmail.com'
+  const to = Array.from(
+    new Set(
+      [primary, ...extra.split(',')]
+        .map((s) => s.trim())
+        .filter(Boolean)
+    )
+  )
   const from = process.env.MAIL_FROM || process.env.SMTP_USER || 'noreply@localhost'
 
   if (!transporter) {

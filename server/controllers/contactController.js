@@ -42,18 +42,23 @@ export async function postContact(req, res) {
     return res.status(400).json({ ok: false, errors })
   }
 
-  try {
-    await Contact.create(data)
-  } catch (e) {
-    console.error('[contact]', e)
-    return res.status(500).json({ ok: false, message: 'Could not save your message. Please try again.' })
+  if (process.env.MONGODB_URI) {
+    try {
+      await Contact.create(data)
+    } catch (e) {
+      console.error('[contact mongo]', e?.message || e)
+    }
   }
 
   const mail = await sendContactEmail(data)
 
+  if (!mail.sent && mail.error === 'mailer_not_configured') {
+    console.error('[contact] mailer not configured — email not delivered')
+  }
+
   return res.status(201).json({
     ok: true,
     emailSent: mail.sent,
-    ...(mail.sent ? {} : { notice: 'Your message was received. If email delivery is delayed, we still have your record.' }),
+    ...(mail.sent ? {} : { notice: 'Your message was received. If email delivery is delayed, please email redblacknode@gmail.com directly.' }),
   })
 }
