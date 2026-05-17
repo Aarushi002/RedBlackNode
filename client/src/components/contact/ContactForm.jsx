@@ -9,6 +9,52 @@ const initial = {
   website: '',
 }
 
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+
+async function submitViaWeb3Forms(form) {
+  const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: `RedBlackNode inquiry — ${form.name}`,
+    from_name: 'RedBlackNode Website',
+    reply_to: form.email,
+    name: form.name,
+    email: form.email,
+    phone: form.phone || '—',
+    message: form.message,
+    botcheck: form.website,
+  }
+  const res = await fetch(WEB3FORMS_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const data = await res.json().catch(() => ({}))
+  return { ok: Boolean(data.success), message: data.message || '' }
+}
+
+async function submitViaBackend(form) {
+  const res = await fetch(apiUrl('/api/contact'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      message: form.message,
+      website: form.website,
+    }),
+  })
+  const data = await res.json().catch(() => ({}))
+  if (res.status === 429) {
+    return { ok: false, status: 429, message: data.message || 'Too many attempts. Please try again later.' }
+  }
+  if (!res.ok) {
+    return { ok: false, status: res.status, message: data.message || 'Something went wrong. Please try again.', fieldErrors: data.errors }
+  }
+  return { ok: Boolean(data.ok), emailSent: data.emailSent !== false }
+}
+
 export function ContactForm() {
   const [form, setForm] = useState(initial)
   const [fieldErrors, setFieldErrors] = useState({})
@@ -22,46 +68,44 @@ export function ContactForm() {
     e.preventDefault()
     setFieldErrors({})
     setGlobalError('')
+
+    if (!form.name.trim() || !form.email.trim() || form.message.trim().length < 10) {
+      const errs = {}
+      if (!form.name.trim()) errs.name = 'Please enter your name.'
+      if (!form.email.trim()) errs.email = 'Please enter a valid email.'
+      if (form.message.trim().length < 10) errs.message = 'Please add a bit more detail (10+ characters).'
+      setFieldErrors(errs)
+      setGlobalError('Please fill in the highlighted fields.')
+      return
+    }
+
     setStatus('loading')
 
     try {
-      const res = await fetch(apiUrl('/api/contact'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          phone: form.phone,
-          email: form.email,
-          message: form.message,
-          website: form.website,
-        }),
-      })
-
-      const data = await res.json().catch(() => ({}))
-
-      if (res.status === 429) {
-        setGlobalError(data.message || 'Too many attempts. Please try again in a few minutes.')
-        setStatus('error')
-        return
-      }
-
-      if (!res.ok) {
-        if (data.errors && typeof data.errors === 'object') {
-          setFieldErrors(data.errors)
+      if (WEB3FORMS_KEY) {
+        const result = await submitViaWeb3Forms(form)
+        if (result.ok) {
+          setEmailSent(true)
+          setStatus('success')
+          setForm(initial)
+          return
         }
-        setGlobalError(data.message || 'Something went wrong. Please try again.')
+        setGlobalError(result.message || 'Could not send your message. Please try again.')
         setStatus('error')
         return
       }
 
-      if (data.ok) {
-        setEmailSent(data.emailSent !== false)
+      const result = await submitViaBackend(form)
+      if (result.ok) {
+        setEmailSent(result.emailSent !== false)
         setStatus('success')
         setForm(initial)
         return
       }
-
-      setGlobalError('Unexpected response. Please try again.')
+      if (result.fieldErrors && typeof result.fieldErrors === 'object') {
+        setFieldErrors(result.fieldErrors)
+      }
+      setGlobalError(result.message || 'Something went wrong. Please try again.')
       setStatus('error')
     } catch {
       setGlobalError('Network error. Check your connection and try again.')
