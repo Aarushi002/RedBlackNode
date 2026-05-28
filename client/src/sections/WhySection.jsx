@@ -15,9 +15,9 @@ export function WhySection() {
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SectionHeader
-          kicker="Why RedBlackNode"
-          title="Built for teams that value judgment, not jargon."
-          description="The work is technically excellent — but never clever for its own sake. Every decision ties back to clarity, longevity, and measurable progress."
+          kicker="Why hire RedBlackNode"
+          title="Freelance web development that ships and ranks."
+          description="Senior freelance developers, transparent timelines, modern tech stacks, and SEO-aware delivery — every decision ties back to clarity, longevity, and measurable business outcomes."
         />
 
         <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

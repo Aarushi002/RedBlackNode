@@ -93,9 +93,9 @@ export function ProjectsSection() {
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SectionHeader
-          kicker="Projects"
-          title="Selected builds across stacks and platforms."
-          description="Explore live work — from MERN products and Shopify commerce to WordPress & Woo. GoHighLevel case studies are available on request."
+          kicker="Freelance Projects"
+          title="Selected freelance work across stacks and platforms."
+          description="Live freelance projects by RedBlackNode — MERN web apps, Shopify storefronts, WordPress and WooCommerce ecommerce, custom dashboards, and automation. GoHighLevel case studies are available on request."
         />
 
         <div className="mt-12 max-w-2xl">

@@ -1,37 +1,42 @@
 export const WHY_POINTS = [
   {
+    title: 'Senior freelance talent, not gig work',
+    description:
+      'You work directly with experienced freelance developers and designers — not anonymous offshore teams or junior account managers.',
+  },
+  {
     title: 'Design meets engineering',
     description:
-      'No handoff cliff — visual craft and technical execution stay in conversation from day one.',
+      'No hand-off cliff between Figma and code — UI/UX design and full-stack development stay in conversation from day one.',
   },
   {
     title: 'End-to-end ownership',
     description:
-      'We stay accountable from discovery through launch, with clear milestones and no mystery phases.',
+      'Discovery, design, development, SEO, deployment, and post-launch support — one accountable team, one clear plan, one launch date.',
   },
   {
     title: 'Modern stacks, practical choices',
     description:
-      'We pick tools that fit the problem — not trends that pad the invoice.',
+      'MERN, Shopify, WordPress, Next.js — we pick the right tool for the problem, not the trend that pads the invoice.',
   },
   {
     title: 'Fast, direct communication',
     description:
-      'You work with builders, not an endless relay of account managers.',
+      'You message the builders directly. No relay through account managers, no week-long reply cycles, no chasing.',
   },
   {
     title: 'Scalable architecture',
     description:
-      'Structures that survive the next feature wave — not a rewrite six months in.',
+      'Backend, database, and frontend structured to survive the next feature wave and the next traffic spike — not a rewrite six months in.',
   },
   {
-    title: 'Maintainable delivery',
+    title: 'SEO and performance baked in',
     description:
-      'Readable code, sensible patterns, and documentation where it matters.',
+      'Semantic HTML, schema.org structured data, fast Core Web Vitals, sitemaps, and clean metadata — built so your site can rank, not just look good.',
   },
   {
     title: 'Outcomes over output',
     description:
-      'We measure success in business impact: clarity, speed, conversion, and operational calm.',
+      'We measure success in business impact — clarity, speed, conversion, retention, and operational calm.',
   },
 ]

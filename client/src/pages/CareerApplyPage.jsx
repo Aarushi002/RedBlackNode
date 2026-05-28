@@ -1,10 +1,17 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { CareerApplicationForm } from '../components/careers/CareerApplicationForm'
 import { getCareerApplicationForm } from '../data/careerApplicationForms'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { SEO_PAGES } from '../data/seo'
 
 export function CareerApplyPage() {
   const { roleId } = useParams()
   const config = getCareerApplicationForm(roleId || '')
+  useDocumentMeta(
+    config
+      ? SEO_PAGES.careerApply(roleId, config.formTitle)
+      : { ...SEO_PAGES.careers, noindex: true },
+  )
   if (!config) return <Navigate to="/careers" replace />
 
   return (

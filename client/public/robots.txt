@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 
-# Replace with your live origin when deployed
+# Block raw application form pages from being indexed (low value, dynamic)
+Disallow: /careers/apply/
+
 Sitemap: https://redblacknode.com/sitemap.xml

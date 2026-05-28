@@ -1,31 +1,32 @@
-export const ABOUT_KICKER = 'About'
+export const ABOUT_KICKER = 'About RedBlackNode'
 
-export const ABOUT_TITLE = 'A studio built for serious digital work.'
+export const ABOUT_TITLE =
+  'A freelance web development & tech solutions studio built for serious work.'
 
-export const ABOUT_SUBTITLE = `We combine product thinking with hands-on engineering — so what ships looks refined and holds up under real traffic, real users, and real deadlines.`
+export const ABOUT_SUBTITLE = `RedBlackNode pairs product thinking with hands-on engineering — so what we ship looks refined, performs under real traffic, and ranks for the searches that matter.`
 
 export const ABOUT_INTRO = [
-  `We build clean, high-performing digital systems that don't break when it actually matters.`,
-  `RedBlackNode is a team of builders focused on clarity, performance, and doing things right the first time. No templates, no unnecessary complexity, no "we'll fix it later" energy.`,
-  `From MERN platforms to Shopify and WordPress builds, WooCommerce setups, CRM and GoHighLevel systems, and automation across n8n, Zapier, and Make, we create solutions that are built to work and built to scale.`,
-  `Built right. Built to last. Built for real users.`,
+  `Founded and led by Aarushi Krishna, RedBlackNode is a remote-first freelance team building high-performance websites, ecommerce stores, MERN web apps, custom software, and automation systems for businesses that want serious tech solutions — not generic agency output.`,
+  `RedBlackNode operates like a focused studio: senior freelance developers and designers, direct communication, transparent timelines, and code that does not break when traffic, users, and deadlines actually arrive.`,
+  `Our freelance services cover website making, software development, MERN stack apps, Shopify and WordPress builds, WooCommerce ecommerce, GoHighLevel and CRM workflows, and end-to-end automation with n8n, Zapier, and Make — built to scale and ranked for SEO from day one.`,
+  `Built right. Built to last. Built for real users, real conversions, and real growth.`,
 ]
 
 export const ABOUT_PILLARS = [
   {
-    title: 'Looks good. Works better.',
-    text: 'Clean, intentional design that feels natural to use. No clutter, no confusion, no "figure it out yourself" moments.',
+    title: 'Design that converts',
+    text: 'Clean, intentional UI/UX that guides users to action — modern visuals, accessible markup, and conversion-focused layouts on every page.',
   },
   {
-    title: 'Built to not break',
-    text: 'Solid engineering, reliable flows, and systems that hold up when things scale. Because fixing things later is expensive.',
+    title: 'Engineering that holds',
+    text: 'Solid full-stack engineering, reliable APIs, and architecture that survives scale. Fewer rewrites, lower long-term cost, faster shipping.',
   },
   {
-    title: 'Business, not just code',
-    text: 'Everything we build ties back to what actually matters: conversions, retention, and smooth operations.',
+    title: 'Business outcomes first',
+    text: 'Every feature ties back to revenue, retention, or operational calm — measurable goals, not vanity launches.',
   },
   {
     title: 'Easy to work with',
-    text: 'Clear communication, fast iteration, and delivery you can actually plan around. No chaos, no chasing.',
+    text: 'Direct freelance team, fast iteration, predictable delivery, and clear communication you can plan a launch around.',
   },
 ]

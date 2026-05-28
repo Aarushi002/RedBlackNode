@@ -1,4 +1,9 @@
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { SEO_PAGES } from '../data/seo'
+
 export function TermsPage() {
+  useDocumentMeta(SEO_PAGES.terms)
+
   return (
     <div className="pt-14 sm:pt-16 lg:pt-[6rem]">
       <article className="mx-auto max-w-2xl px-5 py-16 sm:px-8">

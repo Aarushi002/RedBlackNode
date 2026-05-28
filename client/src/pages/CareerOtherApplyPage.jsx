@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { CareerApplicationForm } from '../components/careers/CareerApplicationForm'
 import { getCareerApplicationForm } from '../data/careerApplicationForms'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { SEO_PAGES } from '../data/seo'
 
 export function CareerOtherApplyPage() {
+  useDocumentMeta(SEO_PAGES.careerOther)
   const config = getCareerApplicationForm('other')
 
   if (!config) {

@@ -36,8 +36,9 @@ export function Footer() {
               <BrandLogo className="h-12 w-auto max-w-[220px] object-center sm:h-14 sm:max-w-[260px] lg:h-20 lg:max-w-[320px]" />
             </Link>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-rbn-muted">
-              A digital product and development studio building precise web systems, commerce, and
-              automation for teams that expect craft and clarity.
+              A freelance web development, software, and tech solutions studio founded by{' '}
+              <span className="text-rbn-fog">Aarushi Krishna</span> — building precise web systems,
+              ecommerce, and automation for teams that expect craft and clarity.
             </p>
             <a
               href="mailto:redblacknode@gmail.com"
@@ -65,8 +66,8 @@ export function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-rbn-border pt-6 text-xs text-rbn-muted sm:mt-12 sm:flex-row sm:items-center sm:gap-4 sm:pt-8">
-          <p>© {new Date().getFullYear()} RedBlackNode. All rights reserved.</p>
-          <p className="text-rbn-muted/80">Built with intent — design, engineering, motion.</p>
+          <p>© {new Date().getFullYear()} RedBlackNode by Aarushi Krishna. All rights reserved.</p>
+          <p className="text-rbn-muted/80">Freelance web development, software, and tech solutions.</p>
         </div>
       </div>
     </footer>

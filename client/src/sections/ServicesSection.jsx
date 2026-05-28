@@ -16,9 +16,9 @@ export function ServicesSection() {
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SectionHeader
-          kicker="Services"
-          title="Capability across the full digital stack."
-          description="Engagements are tailored — from focused sprints to long-term product partnerships — with the same standards for craft and communication."
+          kicker="Freelance Tech Services"
+          title="Website making, software development & tech solutions — end-to-end."
+          description="From focused freelance sprints to long-term product partnerships — MERN, Shopify, WordPress, UI/UX, ecommerce, custom software, automation, SEO, and launch — delivered with senior-level craft, clear communication, and a fixed launch date."
         />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">

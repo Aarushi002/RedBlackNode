@@ -19,9 +19,9 @@ export function ContactSection() {
         <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16 lg:items-start">
           <div>
             <SectionHeader
-              kicker="Contact"
-              title="Tell us what you need — we’ll help you build it."
-              description="Share a concise brief: goals, stack, timeline, and budget band if you can. We reply to serious inquiries quickly."
+              kicker="Contact RedBlackNode"
+              title="Hire freelance developers for your next web project."
+              description="Share a concise brief — goals, tech stack, timeline, and budget band — and we’ll come back quickly with a clear, honest plan. Freelance MERN, Shopify, WordPress, UI/UX, ecommerce, and automation projects all welcome."
             />
             <a
               href="mailto:redblacknode@gmail.com"

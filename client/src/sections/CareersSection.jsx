@@ -17,9 +17,9 @@ export function CareersSection() {
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SectionHeader
-          kicker="Careers"
-          title="Work with RedBlackNode."
-          description="A selective, studio-style bench for builders who want real ownership — and work that shows in the final URL."
+          kicker="Freelance Careers"
+          title="Join RedBlackNode — freelance roles for serious builders."
+          description="Commission-based freelance roles for UI/UX, MERN, Shopify, and WordPress developers. Remote-first, project-driven, and rewarded for real outcomes — not hours logged."
         />
 
         <p className="js-reveal mt-8 max-w-3xl text-base leading-relaxed text-rbn-muted sm:text-[1.05rem]">

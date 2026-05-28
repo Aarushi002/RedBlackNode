@@ -15,10 +15,10 @@ export function ContactCtaSection() {
         <div className="js-reveal flex flex-col items-start gap-5 rounded-2xl border border-rbn-border bg-gradient-to-r from-rbn-accent-soft/35 via-transparent to-transparent px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-10 sm:py-8">
           <div className="max-w-xl">
             <h2 className="font-display text-xl font-semibold tracking-tight text-rbn-white sm:text-2xl">
-              Want to contact us and build something exciting?
+              Ready to hire RedBlackNode for your next web project?
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-rbn-muted">
-              Share a brief — goals, timeline, and stack — and we’ll get back to you quickly.
+              Freelance web development, ecommerce, and automation — share your goals, timeline, and stack and we’ll reply with a clear plan.
             </p>
           </div>
           <Link

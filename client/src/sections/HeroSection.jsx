@@ -9,10 +9,10 @@ import { burstProjectConfetti } from '../lib/projectConfetti'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 import { useIsMobile } from '../hooks/useIsMobile'
 
-const TITLE = 'Not built for average. Built for impact.'
+const TITLE = 'Freelance Web Development. Tech Solutions. Built to Scale.'
 
 const SUB =
-  'We build digital systems that look good, run fast, and actually work — even under pressure. Clean design, solid engineering, no unnecessary nonsense.'
+  'RedBlackNode — founded by Aarushi Krishna — is a freelance web development, software, and tech solutions studio. MERN web apps, Shopify & WordPress stores, UI/UX design, ecommerce, custom software, and automation. Hire senior freelance developers who ship clean, fast, conversion-ready builds.'
 
 export function HeroSection() {
   const rootRef = useRef(null)

@@ -4,86 +4,86 @@
 export const SERVICES = [
   {
     id: 'mern',
-    title: 'MERN Development',
+    title: 'MERN Stack Development',
     description:
-      'Scalable full-stack applications with React, Node, Express, and MongoDB — APIs, auth, dashboards, and deployment-ready delivery.',
+      'Freelance MERN stack development — scalable full-stack web apps with React, Node, Express, and MongoDB. APIs, authentication, dashboards, SaaS platforms, and production-ready deployment.',
     icon: 'stack',
   },
   {
     id: 'shopify',
     title: 'Shopify Development',
     description:
-      'Custom storefronts, theme refinement, app integrations, and checkout experiences tuned for conversion and speed.',
+      'Custom Shopify storefronts, theme development, app integrations, headless commerce, and checkout optimisation — tuned for speed, SEO, and conversion.',
     icon: 'cart',
   },
   {
     id: 'wordpress',
     title: 'WordPress & WooCommerce',
     description:
-      'Custom themes, Elementor or builder workflows when needed, WooCommerce commerce, and ongoing performance care.',
+      'Custom WordPress themes, Elementor and Gutenberg builds, WooCommerce ecommerce stores, multilingual setups, and ongoing performance and security care.',
     icon: 'wp',
   },
   {
     id: 'uiux',
     title: 'UI / UX Design',
     description:
-      'Product-grade layouts, design systems thinking, and Figma-to-build collaboration that respects engineering constraints.',
+      'Product-grade UI/UX design and design systems — Figma prototypes to production-ready React components, with accessibility and conversion baked in.',
     icon: 'layout',
   },
   {
     id: 'landing',
     title: 'Landing Pages & Business Sites',
     description:
-      'High-trust marketing pages and company sites with crisp typography, motion, and measurable structure.',
+      'High-converting landing pages, marketing sites, and business websites with crisp typography, smooth motion, SEO foundations, and measurable structure.',
     icon: 'window',
   },
   {
     id: 'automation',
     title: 'Workflow Automation',
     description:
-      'Connect tools and data with n8n, Zapier, and Make — fewer manual handoffs, clearer pipelines.',
+      'Freelance automation services with n8n, Zapier, and Make — connect CRMs, payments, email, and APIs to remove manual handoffs and grow operational capacity.',
     icon: 'flow',
   },
   {
     id: 'ghl',
     title: 'CRM & GoHighLevel',
     description:
-      'Pipeline setup, funnels, and CRM workflows so sales and marketing stay in sync.',
+      'GoHighLevel agency setup, CRM pipelines, sales funnels, SMS and email automations — so marketing, sales, and ops stay perfectly in sync.',
     icon: 'crm',
   },
   {
     id: 'api',
     title: 'API Integrations',
     description:
-      'REST and third-party integrations with sane error handling, observability, and documentation.',
+      'REST, GraphQL, and third-party API integrations with payments (Stripe, Razorpay), email, analytics, and CRMs — clean error handling, observability, and docs.',
     icon: 'api',
   },
   {
     id: 'custom',
     title: 'Custom Web Applications',
     description:
-      'Bespoke internal tools, client portals, and dashboards built around your workflows.',
+      'Bespoke SaaS platforms, internal tools, client portals, and admin dashboards built around your workflows on a modern, secure tech stack.',
     icon: 'cube',
   },
   {
     id: 'care',
-    title: 'Maintenance & Optimization',
+    title: 'Maintenance & Optimisation',
     description:
-      'Performance passes, security hygiene, and iterative improvements that keep shipping smooth.',
+      'Ongoing website maintenance, performance tuning, security hardening, and feature iteration — keep shipping without surprise breakages.',
     icon: 'gauge',
   },
   {
     id: 'seo',
     title: 'Technical SEO & Analytics',
     description:
-      'Metadata, structured data, sitemaps, and Core Web Vitals–aware markup — plus GA4 and Search Console setup so you can measure what matters.',
+      'Technical SEO services — schema.org structured data, sitemaps, Core Web Vitals optimisation, GA4, and Search Console setup so your site ranks and you can measure what matters.',
     icon: 'search',
   },
   {
     id: 'deploy',
     title: 'Hosting, DNS & Launch',
     description:
-      'Domains, SSL, staging and production deploys on platforms like Vercel, Netlify, or your stack of choice — clean handover when it is time to go live.',
+      'Domains, SSL, DNS, staging, and production deploys on Vercel, Netlify, Render, or your cloud of choice — with a clean handover when it is time to go live.',
     icon: 'server',
   },
 ]
